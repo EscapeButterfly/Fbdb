@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "89274981464",
+    "firebase_url": "https://coursework-2a4eb.firebaseio.com",
+    "project_id": "coursework-2a4eb",
+    "storage_bucket": "coursework-2a4eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89274981464:android:61c77184fce3778b",
+        "android_client_info": {
+          "package_name": "com.gorovoii.vitalii.fbdb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89274981464-orjdsv197ie50i4lim3trbh0vva22m9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gorovoii.vitalii.fbdb",
+            "certificate_hash": "8653a1c2dea749476161ac6b2b34b21b1e5eec39"
+          }
+        },
+        {
+          "client_id": "89274981464-v9acj4t606phqg0fl7lhs3kjsobb110k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMYdyszAHAvaZh9euNDFiSxq6gu32HPis"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89274981464-v9acj4t606phqg0fl7lhs3kjsobb110k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

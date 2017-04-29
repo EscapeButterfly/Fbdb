@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
 import com.gorovoii.vitalii.fbdb.model.Note;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Note("Zametka", "body"));
         data.add(new Note("Zametka1", "body"));
         data.add(new Note("Zametka2", "body"));
+
+
 
         displayNotes();
     }
