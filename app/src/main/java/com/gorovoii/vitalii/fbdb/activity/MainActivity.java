@@ -19,12 +19,17 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
+    List<Note> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        data.add(new Note("Zametka", "body"));
+        data.add(new Note("Zametka1", "body"));
+        data.add(new Note("Zametka2", "body"));
+
+        displayNotes();
     }
 
     @Override
@@ -44,17 +49,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void init() {
-        List<Note> data = new ArrayList<>();
-        data.add(new Note("Zametka", "body"));
-        data.add(new Note("Zametka1", "body"));
-        data.add(new Note("Zametka2", "body"));
+    private void displayNotes() {
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
         mNoteAdapter = new NoteAdapter(this,data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mNoteAdapter);
+        mNoteAdapter.notifyDataSetChanged();
 
     }
 
