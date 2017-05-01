@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Авторизация успешна", Toast.LENGTH_SHORT);
-                            // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            // startActivity(intent);
+                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "Авторизация провалена", Toast.LENGTH_SHORT);
                         }
