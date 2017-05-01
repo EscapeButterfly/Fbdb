@@ -25,6 +25,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gorovoii.vitalii.fbdb.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName=".activity.MainActivity"
+            >
+
+        </activity>
     </application>
 
 </manifest>

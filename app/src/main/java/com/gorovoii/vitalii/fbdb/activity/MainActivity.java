@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
     List<Note> data = new ArrayList<>();
+    LoginActivity l = new LoginActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Note("Zametka", "body"));
         data.add(new Note("Zametka1", "body"));
         data.add(new Note("Zametka2", "body"));
-
-
-
-        displayNotes();
+      //  if(FirebaseAuth.getInstance().getCurrentUser() == null){
+           // Intent intent = new Intent(this, LoginActivity.class);
+           // startActivity(intent);
+       // } else {
+            displayNotes();
+      //  }
     }
 
     @Override
