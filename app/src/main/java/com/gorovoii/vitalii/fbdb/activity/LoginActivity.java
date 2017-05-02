@@ -73,11 +73,13 @@ public class LoginActivity extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Авторизация успешна", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "Авторизация успешна", Toast.LENGTH_SHORT)
+                            .show();
                              Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                              startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, "Авторизация провалена", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "Авторизация провалена", Toast.LENGTH_SHORT)
+                            .show();
                         }
                     }
                 });
@@ -88,9 +90,11 @@ public class LoginActivity extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT)
+                            .show();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT)
+                            .show();
                         }
                     }
                 });
