@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if(item.getItemId() == R.id.signout){
+        if(item.getItemId() == R.id.actionSignOut){
             l.signout();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

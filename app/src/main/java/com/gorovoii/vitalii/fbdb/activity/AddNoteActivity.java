@@ -37,7 +37,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 String body = addBody.toString();
                 MainActivity mainObject = new MainActivity();
                 mainObject.data.add(new Note(title, body));
-                Toast toast = Toast.makeText(AddNoteActivity.this, "Succesful", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(AddNoteActivity.this, "Successful", Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent = new Intent(view.getContext(), MainActivity.class);
                 startActivity(intent);

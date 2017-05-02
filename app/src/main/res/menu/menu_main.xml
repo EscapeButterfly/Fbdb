@@ -10,7 +10,7 @@
         android:visible="true"
         app:showAsAction="always" />
     <item
-        android:id="@+id/signout"
+        android:id="@+id/actionSignOut"
         android:icon="@android:drawable/ic_lock_power_off"
         android:orderInCategory="2"
         android:title="SIGN OUT"
