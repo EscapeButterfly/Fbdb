@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,10 +19,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    LoginActivity l = new LoginActivity();
+
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
+
     List<Note> data = new ArrayList<>();
-    LoginActivity l = new LoginActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.actionAdd) {
             Intent intent = new Intent(this, AddNoteActivity.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.signout){
+            l.signout();
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 

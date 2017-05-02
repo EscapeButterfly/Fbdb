@@ -6,6 +6,15 @@
         android:id="@+id/actionAdd"
         android:icon="@drawable/ic_action_add"
         android:orderInCategory="1"
+        android:title="ADD"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/signout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:orderInCategory="2"
+        android:title="SIGN OUT"
+        android:visible="true"
         app:showAsAction="always" />
 
 </menu>
