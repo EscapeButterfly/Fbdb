@@ -10,7 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
 import com.gorovoii.vitalii.fbdb.model.Note;
@@ -25,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
 
-
+    private FirebaseAuth mAuth;
+    private DatabaseReference myRef;
 
     List<Note> data = new ArrayList<>();
 
@@ -33,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        FirebaseUser user = mAuth.getCurrentUser();
         data.add(new Note("Zametka", "body"));
         data.add(new Note("Zametka1", "body"));
         data.add(new Note("Zametka2", "body"));
