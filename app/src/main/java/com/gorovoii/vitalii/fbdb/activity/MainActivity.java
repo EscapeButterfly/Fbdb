@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
 import com.gorovoii.vitalii.fbdb.model.Note;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
 
+
+
     List<Note> data = new ArrayList<>();
 
     @Override
@@ -33,12 +36,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Note("Zametka", "body"));
         data.add(new Note("Zametka1", "body"));
         data.add(new Note("Zametka2", "body"));
-        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        } else {
-            displayNotes();
-        }
+        displayNotes();
     }
 
     @Override
