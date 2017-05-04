@@ -33,12 +33,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Note("Zametka", "body"));
         data.add(new Note("Zametka1", "body"));
         data.add(new Note("Zametka2", "body"));
-        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        } else {
-            displayNotes();
-        }
+        displayNotes();
     }
 
     @Override

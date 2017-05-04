@@ -40,7 +40,8 @@ public class LoginActivity extends AppCompatActivity
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    //User is signed in
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
 
                 } else {
                     //User is signed out
@@ -55,6 +56,13 @@ public class LoginActivity extends AppCompatActivity
 
         findViewById(R.id.btn_registration).setOnClickListener(this);
         findViewById(R.id.btn_sign_in).setOnClickListener(this);
+
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
 
     }
 
