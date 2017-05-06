@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,27 +31,40 @@ public class MainActivity extends AppCompatActivity {
 
     LoginActivity l = new LoginActivity();
 
+    public static final String NOTES = "Notes";
+
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference myRef;
+    private DatabaseReference mDatabase;
 
-    List<Note> data = new ArrayList<>();
+    private ArrayList<Note> mDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myRef = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        data.add(new Note("Zametka", "body"));
-        data.add(new Note("Zametka1", "body"));
-        data.add(new Note("Zametka2", "body"));
+        updateUI();
         displayNotes();
     }
+
+    private void updateUI() {
+
+        mDataList = new ArrayList<>();
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
+        mNoteAdapter = new NoteAdapter(this, mDataList);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mNoteAdapter);
+        mNoteAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,13 +91,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayNotes() {
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
-        mNoteAdapter = new NoteAdapter(this,data);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mNoteAdapter);
-        mNoteAdapter.notifyDataSetChanged();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                mDataList.clear();
+                DataSnapshot tableNote = dataSnapshot.child(NOTES);
+
+                for (DataSnapshot child: tableNote.getChildren()) {
+                    Note tmpNote = child.getValue(Note.class);
+                    mDataList.add(tmpNote);
+                    mNoteAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
-
 }

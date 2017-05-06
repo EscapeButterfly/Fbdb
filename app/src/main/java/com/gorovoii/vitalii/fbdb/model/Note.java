@@ -5,6 +5,10 @@ public class Note {
     private String title;
     private String body;
 
+    public Note(){
+
+    }
+
     public Note(String title, String body) {
         this.title = title;
         this.body = body;
