@@ -110,7 +110,5 @@ public class LoginActivity extends AppCompatActivity
 
     public void signout(){
         FirebaseAuth.getInstance().signOut();
-        //mAuth.signOut();
-        //mAuth = null;
     }
 }

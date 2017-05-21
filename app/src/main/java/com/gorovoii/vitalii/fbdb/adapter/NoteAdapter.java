@@ -39,22 +39,22 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         return dataList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView title;
-        private TextView body;
+    private TextView title;
+    private TextView body;
 
-        ViewHolder(View itemView) {
-            super(itemView);
-            title = (TextView)itemView.findViewById(R.id.title);
-            body = (TextView) itemView.findViewById(R.id.body);
-        }
-
-        void bind(final Note note) {
-            title.setText(note.getTitle());
-            body.setText(note.getBody());
-        }
+    ViewHolder(View itemView) {
+        super(itemView);
+        title = (TextView)itemView.findViewById(R.id.title);
+        body = (TextView) itemView.findViewById(R.id.body);
     }
+
+    void bind(final Note note) {
+        title.setText(note.getTitle());
+        body.setText(note.getBody());
+    }
+}
 
 }
 

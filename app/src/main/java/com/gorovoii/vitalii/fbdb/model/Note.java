@@ -5,7 +5,7 @@ public class Note {
     private String title;
     private String body;
 
-    public Note(){
+    public Note() {
 
     }
 
