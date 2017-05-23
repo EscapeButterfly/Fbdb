@@ -4,28 +4,35 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="5dp">
 
     <LinearLayout
-        android:padding="8dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:background="@android:drawable/ic_delete" />
 
         <TextView
             android:id="@+id/title"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="#333"
-            tools:text="Моя заметка "
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Моя заметка " />
 
         <TextView
             android:id="@+id/body"
-            tools:text="dasdajsdahsldkalsdj;alskd;alksjdalksdjlaksjd;la asdkasdalskjda sdjjoaj oasjdasd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Body text of my note " />
 
     </LinearLayout>
 
