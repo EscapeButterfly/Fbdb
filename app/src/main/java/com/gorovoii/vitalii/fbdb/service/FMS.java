@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,35 +17,45 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.activity.MainActivity;
 
-public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
+import java.util.Map;
+
+public class FMS extends com.google.firebase.messaging.FirebaseMessagingService{
 
     private static final String TAG = "MyFirebaseMsgService";
 
+    private LocalBroadcastManager broadcaster;
+
+    @Override
+    public void onCreate() {
+        broadcaster = LocalBroadcastManager.getInstance(this);
+    }
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // [START_EXCLUDE]
-        // There are two types of messages data messages and notification messages. Data messages are handled
-        // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
-        // traditionally used with GCM. Notification messages are only received here in onMessageReceived when the app
-        // is in the foreground. When the app is in the background an automatically generated notification is displayed.
-        // When the user taps on the notification they are returned to the app. Messages containing both notification
-        // and data payloads are treated as notification messages. The Firebase console always sends notification
-        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
-        // [END_EXCLUDE]
-
-        // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         String title = remoteMessage.getNotification().getTitle();
-        String message = remoteMessage.getNotification().getBody();
+        String body = remoteMessage.getNotification().getBody();
+
         Log.i(TAG, "onMessageReceived: title : "+title);
-        Log.i(TAG, "onMessageReceived: message : "+message);
+
+        Intent intent = new Intent("MyData");
+        intent.putExtra("title", title);
+        intent.putExtra("body", body);
+     /*   for (Map.Entry<String, String> entry : remoteMessage.getData().entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Log.d(TAG, "key, " + key + " value " + value);
+        }*/
+        broadcaster.sendBroadcast(intent);
+
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
-
         }
+
+//        listener.messageRecieveSuccessfuly();
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {

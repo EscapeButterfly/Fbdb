@@ -1,12 +1,12 @@
 package com.gorovoii.vitalii.fbdb.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -87,6 +87,8 @@ public class AddNoteActivity extends AppCompatActivity {
                 if (databaseError == null) {
                     Toast.makeText(AddNoteActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AddNoteActivity.this, MainActivity.class));
+                    onStart();
+               //     startService(new Intent(this, FMS.class));
                 } else {
                     Toast.makeText(AddNoteActivity.this, "Note was not posted", Toast.LENGTH_SHORT).show();
                 }
@@ -95,9 +97,30 @@ public class AddNoteActivity extends AppCompatActivity {
 
     }
 
-    private void setEditingEnabled(boolean state) {
+   private void setEditingEnabled(boolean state) {
         addTtl.setEnabled(state);
         addBody.setEnabled(state);
     }
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("MyData")
+        );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //sendNotification
+        }
+    };*/
 
 }

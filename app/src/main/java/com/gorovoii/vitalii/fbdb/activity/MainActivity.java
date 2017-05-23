@@ -1,13 +1,18 @@
 package com.gorovoii.vitalii.fbdb.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,15 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
 import com.gorovoii.vitalii.fbdb.model.Note;
-import com.gorovoii.vitalii.fbdb.service.FirebaseMessagingService;
+import com.gorovoii.vitalii.fbdb.service.FMS;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "User info";
-
-    private LoginActivity l;
 
     public static final String NOTES = "Notes";
 
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
+           // String uid = user.getUid();
             Log.d(TAG, "Email: " + email);
         }
 
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(item.getItemId() == R.id.actionSignOut){
-            l.signout();
+            LoginActivity.signout();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -121,4 +124,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("MyData")
+        );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String title = intent.getExtras().getString("title");
+            String body = intent.getExtras().getString("body");
+            Toast.makeText(MainActivity.this, body+"\n"+title, Toast.LENGTH_LONG).show();
+        }
+    };
+
 }
