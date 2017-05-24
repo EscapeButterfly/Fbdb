@@ -43,6 +43,11 @@
             </intent-filter>
         </service>
 
+        <!-- Declaring Service in Manifest -->
+        <service
+            android:name=".service.DevToDevIntent"
+            android:exported="false" />
+
     </application>
 
 </manifest>
