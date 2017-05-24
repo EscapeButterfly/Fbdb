@@ -25,23 +25,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.model.Note;
-import com.gorovoii.vitalii.fbdb.service.DeviceToDevice;
+import com.gorovoii.vitalii.fbdb.service.DevToDevIntent;
 
 import static com.gorovoii.vitalii.fbdb.activity.MainActivity.NOTES;
 
 public class AddNoteActivity extends AppCompatActivity {
 
     public static final String REQUIRED = "Required";
-    private static final String TOKEN = "eH8mtaNMofM:APA91bEyVVDOzE8pQh20ISaImUWcnUqLe5ZdZStsqT3EpOM4skCG0plLxxMtPCVPfHXGrtJYw2nSrKLUyIOtZB1l4lZq5zK9CG13jZtScbSrNf2lvP4ZD2LCgITIYVcc3EZHEur_czfM";
+    private static final String TOKEN =
+            "cL0zizW4Opk:APA91bGguwz24W0wutvJc1ZAKdY2hQhNCD0Yk3td_GOnQ60Q3SFapWKNsacFR8vZ7w6PsowYhc2Fsmx1-DeLw3meRpnLPqh3niGE1ltcef27mdgLA4XyjU0gTN0QDpFcCnefSOpIYSEQ";
 
     EditText addTtl;
     EditText addBody;
     Button saveBtn;
     Button sendNtfct;
-    boolean mBounded;
-    DeviceToDevice mDeviceToDevice;
 
-    ServiceConnection mConnection;
+    private BroadcastReceiver mMessageReceiver;
 
     private FirebaseAuth mAuth;
 
@@ -50,33 +49,26 @@ public class AddNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
-        mConnection = new ServiceConnection() {
-
-            public void onServiceDisconnected(ComponentName name) {
-                Toast.makeText(AddNoteActivity.this, "Service is disconnected", Toast.LENGTH_SHORT).show();
-                mBounded = false;
-                mDeviceToDevice = null;
-            }
-
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                Toast.makeText(AddNoteActivity.this, "Service is connected", Toast.LENGTH_SHORT).show();
-                mBounded = true;
-                DeviceToDevice.LocalBinder mLocalBinder = (DeviceToDevice.LocalBinder)service;
-                mDeviceToDevice = mLocalBinder.getServerInstance();
+        mMessageReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String title = intent.getExtras().getString("title");
+                String body = intent.getExtras().getString("body");
+                Toast.makeText(AddNoteActivity.this, title+"\n"+body, Toast.LENGTH_LONG).show();
             }
         };
+
         sendNtfct = (Button)findViewById(R.id.btnSendNtfct);
         if (sendNtfct == null) {
-            //error with ui (layout)
+            Log.d("Layout trouble", "Check your layout");
         }
         sendNtfct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDeviceToDevice == null) {
-                    Toast.makeText(AddNoteActivity.this, "Error msg", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mDeviceToDevice.sendNotification(TOKEN);
+                Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
+                startService(intent);
+    //              Intent intentForService = new Intent(AddNoteActivity.this, DevToDevIntent.class);
+   //             intentForService.putExtra("title",TOKEN);
             }
         });
 
@@ -89,19 +81,15 @@ public class AddNoteActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent mIntent = new Intent(this, DeviceToDevice.class);
-        bindService(mIntent, mConnection, BIND_AUTO_CREATE);
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("MyData")
+        );
     };
-
-
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mBounded) {
-            unbindService(mConnection);
-            mBounded = false;
-        }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     };
 
     private void initUI() {
@@ -147,40 +135,15 @@ public class AddNoteActivity extends AppCompatActivity {
                 if (databaseError == null) {
                     Toast.makeText(AddNoteActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AddNoteActivity.this, MainActivity.class));
-                    onStart();
-               //     startService(new Intent(this, FMS.class));
                 } else {
                     Toast.makeText(AddNoteActivity.this, "Note was not posted", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
    private void setEditingEnabled(boolean state) {
         addTtl.setEnabled(state);
         addBody.setEnabled(state);
     }
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
-                new IntentFilter("MyData")
-        );
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
-    }
-
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            //sendNotification
-        }
-    };*/
-
 }
