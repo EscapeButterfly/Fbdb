@@ -22,11 +22,10 @@ import okhttp3.Response;
 public class DevToDevIntent extends IntentService {
 
     private static final String TOKEN =
-            "cL0zizW4Opk:APA91bGguwz24W0wutvJc1ZAKdY2hQhNCD0Yk3td_GOnQ60Q3SFapWKNsacFR8vZ7w6PsowYhc2Fsmx1-DeLw3meRpnLPqh3niGE1ltcef27mdgLA4XyjU0gTN0QDpFcCnefSOpIYSEQ";
+            "efvdRSRwRTw:APA91bHKxf5dT2EwVzgGEKyWBEWX5gIxr672PQeo_Hhn1sxYWSxE33saVXtLslkeSAKYNzkAdjM2vMhS4N6LPQXLTPjh21VuaUShg_yLIUv0aOjIo_R_xqdV7Te8YfSRyg-IAcZ69s26";
 
     public static final String LEGACY_SERVER_KEY =
             "AAAASKprTh8:APA91bG2Q6DhRf6vNLZ7FRQ6cJyAIu7OsPRau8BsO8pbSQk6WphOqmGU_MfRLLmUK15g50iu4S2mY96SmIOgCS9kTpBJHuAGLRDiUDlCfMON19IGSzlbztqWrAwFL8FQf478YxIJgQ-B";
-
 
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
@@ -34,7 +33,6 @@ public class DevToDevIntent extends IntentService {
     public DevToDevIntent() {
         super("serviceMessage");
     }
-
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {

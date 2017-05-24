@@ -58,27 +58,6 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(mUser != null) {
-            mUser.getToken(true)
-                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-                        public void onComplete(@NonNull Task<GetTokenResult> task) {
-                            if (task.isSuccessful()) {
-                                String idToken = task.getResult().getToken();
-                                Log.e("tokechRefresh", idToken);
-                            }
-                        }
-                    });
-        } else {
-            Log.e("TAG", "user is invalid");
-        }
-
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            String email = user.getEmail();
-//
-//            Log.d(TAG, "Email: " + email);
-//        }
 
 //        deleteBtn = (Button) findViewById(R.id.deleteBtn);
 //        deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,13 +70,7 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
         displayNotes();
     }
-
-//    private void deleteNote() {
-//        for(Note i : mDataList) {
-//            mDataList.remove(i);
-//        }
-//    }
-
+    
     private void updateUI() {
 
         mDataList = new ArrayList<>();

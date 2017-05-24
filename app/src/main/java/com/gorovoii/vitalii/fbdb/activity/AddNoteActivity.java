@@ -32,8 +32,6 @@ import static com.gorovoii.vitalii.fbdb.activity.MainActivity.NOTES;
 public class AddNoteActivity extends AppCompatActivity {
 
     public static final String REQUIRED = "Required";
-    private static final String TOKEN =
-            "cL0zizW4Opk:APA91bGguwz24W0wutvJc1ZAKdY2hQhNCD0Yk3td_GOnQ60Q3SFapWKNsacFR8vZ7w6PsowYhc2Fsmx1-DeLw3meRpnLPqh3niGE1ltcef27mdgLA4XyjU0gTN0QDpFcCnefSOpIYSEQ";
 
     EditText addTtl;
     EditText addBody;
@@ -62,7 +60,7 @@ public class AddNoteActivity extends AppCompatActivity {
         if (sendNtfct == null) {
             Log.d("Layout trouble", "Check your layout");
         }
-        sendNtfct.setOnClickListener(new View.OnClickListener() {
+      /*  sendNtfct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
@@ -70,7 +68,7 @@ public class AddNoteActivity extends AppCompatActivity {
     //              Intent intentForService = new Intent(AddNoteActivity.this, DevToDevIntent.class);
    //             intentForService.putExtra("title",TOKEN);
             }
-        });
+        }); */
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -134,6 +132,8 @@ public class AddNoteActivity extends AppCompatActivity {
 
                 if (databaseError == null) {
                     Toast.makeText(AddNoteActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
+                    startService(intent);
                     startActivity(new Intent(AddNoteActivity.this, MainActivity.class));
                 } else {
                     Toast.makeText(AddNoteActivity.this, "Note was not posted", Toast.LENGTH_SHORT).show();
