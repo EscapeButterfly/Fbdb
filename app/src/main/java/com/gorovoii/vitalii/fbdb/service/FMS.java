@@ -28,7 +28,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class FMS extends com.google.firebase.messaging.FirebaseMessagingService{
+public class FMS extends com.google.firebase.messaging.FirebaseMessagingService {
 
 
     private static final String TAG = "MyFirebaseMsgService";
@@ -37,6 +37,7 @@ public class FMS extends com.google.firebase.messaging.FirebaseMessagingService{
 
     @Override
     public void onCreate() {
+        Log.e("FMS", "onCreate");
         broadcaster = LocalBroadcastManager.getInstance(this);
     }
 
@@ -65,8 +66,6 @@ public class FMS extends com.google.firebase.messaging.FirebaseMessagingService{
 
         }
 
-//        listener.messageRecieveSuccessfuly();
-
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
@@ -75,13 +74,4 @@ public class FMS extends com.google.firebase.messaging.FirebaseMessagingService{
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
-    // [END receive_message]
-
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
-
-
 }
