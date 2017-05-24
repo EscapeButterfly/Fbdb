@@ -12,13 +12,6 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <Button
-            android:id="@+id/deleteBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="right"
-            android:background="@android:drawable/ic_delete" />
-
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -26,13 +19,28 @@
             android:textColor="#333"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Моя заметка " />
+            tools:text="Моя заметка "/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="right"
+                android:background="@android:drawable/ic_delete" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Body text of my note " />
+            tools:text="Body text of my note "
+
+            />
 
     </LinearLayout>
 
