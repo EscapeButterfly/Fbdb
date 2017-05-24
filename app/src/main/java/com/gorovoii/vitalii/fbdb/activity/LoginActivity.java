@@ -43,11 +43,7 @@ public class LoginActivity extends AppCompatActivity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
-                } else {
-                    //User is signed out
-
                 }
-
             }
         };
 
@@ -61,9 +57,7 @@ public class LoginActivity extends AppCompatActivity
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-
         }
-
     }
 
     @Override
@@ -73,8 +67,8 @@ public class LoginActivity extends AppCompatActivity
         } else if (v.getId() == R.id.btn_registration) {
             registration(email.getText().toString(), password.getText().toString());
         }
-
     }
+
     public void signin(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -101,6 +95,7 @@ public class LoginActivity extends AppCompatActivity
                             Toast.makeText(LoginActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT)
                             .show();
                         } else {
+                            Log.e("register", task.getException().toString());
                             Toast.makeText(LoginActivity.this, "Регистрация провалена", Toast.LENGTH_SHORT)
                             .show();
                         }
