@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Fbdb</string>
+    <string name="app_name">Notes on cloud</string>
     <string name="title_activity_add_note">AddNoteActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Notes on cloud</string>
     <string name="title_activity_select_user">SelectUserActivity</string>
 </resources>
