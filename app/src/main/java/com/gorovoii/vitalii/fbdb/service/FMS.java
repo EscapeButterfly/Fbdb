@@ -30,7 +30,6 @@ import okhttp3.Response;
 
 public class FMS extends com.google.firebase.messaging.FirebaseMessagingService {
 
-
     private static final String TAG = "MyFirebaseMsgService";
 
     private LocalBroadcastManager broadcaster;

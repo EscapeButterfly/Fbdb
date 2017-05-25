@@ -39,7 +39,6 @@ public class DevToDevIntent extends IntentService {
         //send message
         Log.e("IntentService", "handling");
         try {
-
             OkHttpClient client = new OkHttpClient();
             JSONObject json=new JSONObject();
             JSONObject dataJson=new JSONObject();

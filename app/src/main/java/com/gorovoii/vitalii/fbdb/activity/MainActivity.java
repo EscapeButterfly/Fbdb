@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
-import com.gorovoii.vitalii.fbdb.helper.RecyclerClickListener;
 import com.gorovoii.vitalii.fbdb.model.Note;
 
 import java.util.ArrayList;
@@ -55,16 +54,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
         updateUI();
         displayNotes();
-    }
-
-    void deleteNote(int id) {
-        mDataList.remove(id);
     }
 
     private void updateUI() {
@@ -112,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 mDataList.clear();
                 DataSnapshot tableNote = dataSnapshot.child(NOTES);
 
-                for (DataSnapshot child: tableNote.getChildren()) {
+                for (DataSnapshot child : tableNote.getChildren()) {
                     Note tmpNote = child.getValue(Note.class);
                     mDataList.add(tmpNote);
                 }

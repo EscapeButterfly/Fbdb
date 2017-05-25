@@ -66,7 +66,6 @@ class ViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 final String keyToRemove = note.getFirebaseKey();
-
                 FirebaseDatabase ref = FirebaseDatabase.getInstance();
                 ref.getReference().child(NOTES).child(keyToRemove).removeValue(new DatabaseReference.CompletionListener() {
                     @Override
@@ -74,11 +73,9 @@ class ViewHolder extends RecyclerView.ViewHolder {
                         if(databaseError != null) {
                             //notify user
                         } else {
-
                         }
                     }
                 });
-
             }
         });
     }

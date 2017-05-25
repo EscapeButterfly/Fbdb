@@ -36,7 +36,6 @@ public class AddNoteActivity extends AppCompatActivity {
     EditText addTtl;
     EditText addBody;
     Button saveBtn;
-    //Button sendNtfct;
 
     private BroadcastReceiver mMessageReceiver;
 
@@ -58,24 +57,9 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         };
 
-//        sendNtfct = (Button)findViewById(R.id.btnSendNtfct);
-//        if (sendNtfct == null) {
-//            Log.d("Layout trouble", "Check your layout");
-//        }
-//      /*  sendNtfct.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
-//                startService(intent);
-//    //              Intent intentForService = new Intent(AddNoteActivity.this, DevToDevIntent.class);
-//   //             intentForService.putExtra("title",TOKEN);
-//            }
-//        }); */
-
         mAuth = FirebaseAuth.getInstance();
 
         initUI();
-
     }
 
     @Override
