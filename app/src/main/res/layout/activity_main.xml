@@ -9,7 +9,16 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:scaleX=".3"
+        android:scaleY=".3"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

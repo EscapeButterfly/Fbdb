@@ -36,7 +36,7 @@ public class AddNoteActivity extends AppCompatActivity {
     EditText addTtl;
     EditText addBody;
     Button saveBtn;
-    Button sendNtfct;
+    //Button sendNtfct;
 
     private BroadcastReceiver mMessageReceiver;
 
@@ -47,6 +47,8 @@ public class AddNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
+        mAuth = FirebaseAuth.getInstance();
+
         mMessageReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -56,19 +58,19 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         };
 
-        sendNtfct = (Button)findViewById(R.id.btnSendNtfct);
-        if (sendNtfct == null) {
-            Log.d("Layout trouble", "Check your layout");
-        }
-      /*  sendNtfct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
-                startService(intent);
-    //              Intent intentForService = new Intent(AddNoteActivity.this, DevToDevIntent.class);
-   //             intentForService.putExtra("title",TOKEN);
-            }
-        }); */
+//        sendNtfct = (Button)findViewById(R.id.btnSendNtfct);
+//        if (sendNtfct == null) {
+//            Log.d("Layout trouble", "Check your layout");
+//        }
+//      /*  sendNtfct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
+//                startService(intent);
+//    //              Intent intentForService = new Intent(AddNoteActivity.this, DevToDevIntent.class);
+//   //             intentForService.putExtra("title",TOKEN);
+//            }
+//        }); */
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -112,19 +114,23 @@ public class AddNoteActivity extends AppCompatActivity {
                 imm.hideSoftInputFromInputMethod(view != null ? view.getWindowToken() : null, 0);
 
                 setEditingEnabled(false);
-                postNote(new Note(addTtl.getText().toString(), addBody.getText().toString()));
+                saveBtn.setEnabled(false);
+
+                postNote(addTtl.getText().toString(), addBody.getText().toString());
                 Toast.makeText(AddNoteActivity.this,"Posting...", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void postNote(Note note) {
+    private void postNote(String title, String body) {
 
         DatabaseReference mDbRef = FirebaseDatabase.getInstance().getReference();
 
         String key = mDbRef.child(NOTES).push().getKey();
 
-        mDbRef.child(NOTES).child(key).setValue(note, new DatabaseReference.CompletionListener() {
+        Note noteToSave = new Note(key, title, body);
+
+        mDbRef.child(NOTES).child(key).setValue(noteToSave, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 

@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gorovoii.vitalii.fbdb.R;
 import com.gorovoii.vitalii.fbdb.adapter.NoteAdapter;
+import com.gorovoii.vitalii.fbdb.helper.RecyclerClickListener;
 import com.gorovoii.vitalii.fbdb.model.Note;
 
 import java.util.ArrayList;
@@ -41,13 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private NoteAdapter mNoteAdapter;
+    private ProgressBar mProgressBar;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     private ArrayList<Note> mDataList;
-
-    private Button deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +59,20 @@ public class MainActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
-
-//        deleteBtn = (Button) findViewById(R.id.deleteBtn);
-//        deleteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deleteNote();
-//            }
-//        });
-
         updateUI();
         displayNotes();
     }
-    
+
+    void deleteNote(int id) {
+        mDataList.remove(id);
+    }
+
     private void updateUI() {
 
         mDataList = new ArrayList<>();
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recycler);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mNoteAdapter = new NoteAdapter(this, mDataList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -108,24 +105,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayNotes() {
-
+        showProgressBar(true);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 mDataList.clear();
                 DataSnapshot tableNote = dataSnapshot.child(NOTES);
 
                 for (DataSnapshot child: tableNote.getChildren()) {
                     Note tmpNote = child.getValue(Note.class);
                     mDataList.add(tmpNote);
-                    mNoteAdapter.notifyDataSetChanged();
                 }
+                mRecyclerView.setAdapter(mNoteAdapter);
+                mNoteAdapter.notifyDataSetChanged();
+                showProgressBar(false);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                showProgressBar(false);
             }
         });
     }
@@ -152,5 +150,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, body+"\n"+title, Toast.LENGTH_LONG).show();
         }
     };
+
+    private void showProgressBar(boolean isProgrssBarVisible) {
+        if(isProgrssBarVisible) {
+            mRecyclerView.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+        }
+    }
 
 }
