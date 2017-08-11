@@ -1,8 +1,7 @@
-package com.gorovoii.vitalii.fbdb.adapter;
+package com.coursework.joulis1derful.notes.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,12 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gorovoii.vitalii.fbdb.R;
-import com.gorovoii.vitalii.fbdb.model.Note;
+import com.coursework.joulis1derful.notes.R;
+import com.coursework.joulis1derful.notes.model.Note;
 
 import java.util.List;
 
-import static com.gorovoii.vitalii.fbdb.activity.MainActivity.NOTES;
+import static com.coursework.joulis1derful.notes.activity.MainActivity.NOTES;
 
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {

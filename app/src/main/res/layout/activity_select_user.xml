@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.gorovoii.vitalii.fbdb.activity.SelectUserActivity">
+    tools:context="com.coursework.joulis1derful.notes.activity.SelectUserActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleruser"

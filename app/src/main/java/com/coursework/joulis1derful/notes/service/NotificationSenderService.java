@@ -1,11 +1,9 @@
-package com.gorovoii.vitalii.fbdb.service;
+package com.coursework.joulis1derful.notes.service;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONObject;
 
@@ -19,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class DevToDevIntent extends IntentService {
+public class NotificationSenderService extends IntentService {
 
     private static final String TOKEN =
             "efvdRSRwRTw:APA91bHKxf5dT2EwVzgGEKyWBEWX5gIxr672PQeo_Hhn1sxYWSxE33saVXtLslkeSAKYNzkAdjM2vMhS4N6LPQXLTPjh21VuaUShg_yLIUv0aOjIo_R_xqdV7Te8YfSRyg-IAcZ69s26";
@@ -30,7 +28,7 @@ public class DevToDevIntent extends IntentService {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
-    public DevToDevIntent() {
+    public NotificationSenderService() {
         super("serviceMessage");
     }
 

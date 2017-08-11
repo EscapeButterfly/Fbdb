@@ -1,4 +1,4 @@
-package com.gorovoii.vitalii.fbdb.model;
+package com.coursework.joulis1derful.notes.model;
 
 public class Note {
 

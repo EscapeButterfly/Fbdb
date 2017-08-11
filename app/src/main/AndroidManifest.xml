@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gorovoii.vitalii.fbdb">
+    package="com.coursework.joulis1derful.notes">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -9,20 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name="com.coursework.joulis1derful.notes.activity.MainActivity"></activity>
         <activity
-            android:name=".activity.AddNoteActivity"
+            android:name="com.coursework.joulis1derful.notes.activity.AddNoteActivity"
             android:label="@string/title_activity_add_note"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.coursework.joulis1derful.notes.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.gorovoii.vitalii.fbdb.activity.MainActivity" />
+                android:value="com.coursework.joulis1derful.notes.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.coursework.joulis1derful.notes.activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName="com.coursework.joulis1derful.notes.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,14 +30,14 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.FirebaseInstanceIDService">
+        <service android:name="com.coursework.joulis1derful.notes.service.FirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
         <service
-            android:name=".service.FMS">
+            android:name="com.coursework.joulis1derful.notes.service.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -45,7 +45,7 @@
 
         <!-- Declaring Service in Manifest -->
         <service
-            android:name=".service.DevToDevIntent"
+            android:name="com.coursework.joulis1derful.notes.service.NotificationSenderService"
             android:exported="false" />
 
     </application>

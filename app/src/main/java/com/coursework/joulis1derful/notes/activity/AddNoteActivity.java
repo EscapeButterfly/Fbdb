@@ -1,18 +1,13 @@
-package com.gorovoii.vitalii.fbdb.activity;
+package com.coursework.joulis1derful.notes.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,11 +18,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gorovoii.vitalii.fbdb.R;
-import com.gorovoii.vitalii.fbdb.model.Note;
-import com.gorovoii.vitalii.fbdb.service.DevToDevIntent;
+import com.coursework.joulis1derful.notes.R;
+import com.coursework.joulis1derful.notes.model.Note;
+import com.coursework.joulis1derful.notes.service.NotificationSenderService;
 
-import static com.gorovoii.vitalii.fbdb.activity.MainActivity.NOTES;
+import static com.coursework.joulis1derful.notes.activity.MainActivity.NOTES;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -122,7 +117,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
                 if (databaseError == null) {
                     Toast.makeText(AddNoteActivity.this, "Successfully posted", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, DevToDevIntent.class);
+                    Intent intent = new Intent(Intent.ACTION_SYNC, null, AddNoteActivity.this, NotificationSenderService.class);
                     startService(intent);
                     startActivity(new Intent(AddNoteActivity.this, MainActivity.class));
                 } else {

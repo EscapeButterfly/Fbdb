@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.gorovoii.vitalii.fbdb"
+        applicationId "com.coursework.joulis1derful.notes"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1

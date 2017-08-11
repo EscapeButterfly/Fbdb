@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context="com.gorovoii.vitalii.fbdb.activity.AddNoteActivity">
+    tools:context="com.coursework.joulis1derful.notes.activity.AddNoteActivity">
 
     <EditText
         android:hint="Title"

@@ -1,4 +1,4 @@
-package com.gorovoii.vitalii.fbdb.service;
+package com.coursework.joulis1derful.notes.service;
 
 import android.util.Log;
 
